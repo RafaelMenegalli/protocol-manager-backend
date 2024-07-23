@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Document {
+  id   String @id @default(uuid())
+  name String
+
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now())
+  protocols Protocol[]
+
+  @@map("documents")
+}
+
+model People {
+  id   String @id @default(uuid())
+  name String
+
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now())
+  protocols Protocol[]
+
+  @@map("people")
+}
+
+model Protocol {
+  id             String   @id @default(uuid())
+  name           String
+  initial_date   DateTime
+  final_date     DateTime
+  partial_answer Boolean
+  right          Boolean
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+
+  people_id   String
+  document_id String
+  people      People   @relation(fields: [people_id], references: [id])
+  document    Document @relation(fields: [document_id], references: [id])
+
+  @@map("protocols")
+}
