@@ -6,6 +6,7 @@ import { ListPeopleController } from "./controllers/people/ListPeopleController"
 import { CreateDocumentController } from "./controllers/document/CreateDocumentController";
 import { ListDocumentController } from "./controllers/document/ListDocumentController";
 import { CreateProtocolController } from "./controllers/protocol/CreateProtocolController";
+import { ListProtocolsController } from "./controllers/protocol/ListProtocolsController";
 
 const router = Router()
 
@@ -20,7 +21,7 @@ router.get("/documents", new ListDocumentController().handle)
 
 //PROTOCOL
 router.post("/protocol", new CreateProtocolController().handle)
-
+router.get("/protocols",  new ListProtocolsController().handle)
 
 export {
     router
