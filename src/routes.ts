@@ -7,6 +7,7 @@ import { CreateDocumentController } from "./controllers/document/CreateDocumentC
 import { ListDocumentController } from "./controllers/document/ListDocumentController";
 import { CreateProtocolController } from "./controllers/protocol/CreateProtocolController";
 import { ListProtocolsController } from "./controllers/protocol/ListProtocolsController";
+import { DeleteProtocolController } from "./controllers/protocol/DeleteProtocolController";
 
 const router = Router()
 
@@ -22,6 +23,7 @@ router.get("/documents", new ListDocumentController().handle)
 //PROTOCOL
 router.post("/protocol", new CreateProtocolController().handle)
 router.get("/protocols",  new ListProtocolsController().handle)
+router.delete("/protocol/:id", new DeleteProtocolController().handle)
 
 export {
     router
